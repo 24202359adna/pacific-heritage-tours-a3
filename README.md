@@ -82,7 +82,7 @@ Then visit `http://localhost:8000`
 
 ## Published Website
 
-- **Live URL:** *https://24202359adna.github.io/pacific-heritage-tours/*
+- **Live URL:** *(https://24202359adna.github.io/pacific-heritage-tours-a3/)*
 - **Repository:** *https://github.com/24202359adna/pacific-heritage-tours*
 
 *(Update these links after you push the Assessment 3 changes.)*
