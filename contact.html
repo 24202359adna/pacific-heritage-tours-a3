@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact Pacific Heritage Tours or request a booking. Use our form for enquiries, tour reservations and general questions. We respond within two working days.">
+  <title>Contact &amp; Booking | Pacific Heritage Tours</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header>
+    <div class="container">
+      <p class="site-title">
+        <a href="index.html">Pacific Heritage Tours</a>
+      </p>
+      <nav aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="tours.html">Tours</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="contact.html" aria-current="page">Contact &amp; Booking</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <div class="container">
+      <h1>Contact &amp; Booking</h1>
+
+      <p>
+        Use the form below to ask a question or request a place on one
+        of our tours. Fields marked with an asterisk
+        (<span class="required" aria-hidden="true">*</span>) are required.
+        We aim to reply within two working days.
+      </p>
+
+      <div id="form-status"
+           role="status"
+           aria-live="polite"
+           aria-atomic="true"
+           class="status-message">
+      </div>
+
+      <form id="booking-form" action="#" method="post" novalidate>
+        <div class="form-group">
+          <label for="fullname">
+            Full name
+            <span class="required" aria-hidden="true">*</span>
+          </label>
+          <input type="text"
+                 id="fullname"
+                 name="fullname"
+                 required
+                 autocomplete="name"
+                 minlength="2">
+        </div>
+
+        <div class="form-group">
+          <label for="email">
+            Email address
+            <span class="required" aria-hidden="true">*</span>
+          </label>
+          <input type="email"
+                 id="email"
+                 name="email"
+                 required
+                 autocomplete="email">
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone number (optional)</label>
+          <input type="tel"
+                 id="phone"
+                 name="phone"
+                 autocomplete="tel"
+                 pattern="[\d\s\+\-\(\)]{7,20}">
+        </div>
+
+        <fieldset>
+          <legend>What would you like to do?</legend>
+
+          <div class="form-group">
+            <label for="enquiry-type">
+              Type of enquiry
+              <span class="required" aria-hidden="true">*</span>
+            </label>
+            <select id="enquiry-type" name="enquiry-type" required>
+              <option value="">Please select</option>
+              <option value="booking">Request a booking</option>
+              <option value="info">General information</option>
+              <option value="group">Group or private tour</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="tour-interest">Tour of interest (if booking)</label>
+            <select id="tour-interest" name="tour-interest">
+              <option value="">No specific tour yet</option>
+              <option value="village">Village Cultural Day</option>
+              <option value="coastal">Coastal Heritage Walk</option>
+              <option value="craft">Craft &amp; Weaving Workshop</option>
+              <option value="custom">Custom / private arrangement</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="preferred-date">Preferred date (if known)</label>
+            <input type="date"
+                   id="preferred-date"
+                   name="preferred-date"
+                   min="2026-01-01">
+          </div>
+
+          <div class="form-group">
+            <label for="guests">Number of guests</label>
+            <input type="number"
+                   id="guests"
+                   name="guests"
+                   min="1"
+                   max="12"
+                   value="1">
+          </div>
+        </fieldset>
+
+        <div class="form-group">
+          <label for="message">
+            Your message
+            <span class="required" aria-hidden="true">*</span>
+          </label>
+          <textarea id="message"
+                    name="message"
+                    rows="5"
+                    required
+                    minlength="10"
+                    placeholder="Please tell us a little about your plans or questions..."></textarea>
+        </div>
+
+        <button type="submit">Send enquiry</button>
+      </form>
+
+      <section class="section" style="margin-top: 2.5rem;" aria-labelledby="other-contact-heading">
+        <h2 id="other-contact-heading">Other ways to reach us</h2>
+        <p>
+          If the form does not suit your needs, you can also contact us directly by phone or by email:
+        </p>
+        <p>
+          <strong>Phone:</strong>
+          <a href="tel:+67570326791">+675 7032 6791</a>
+        </p>
+        <p>
+          <strong>Email:</strong>
+          <a href="mailto:adrielnaria49@gmail.com">adrielnaria49@gmail.com</a>
+        </p>
+        <p>We aim to respond to enquiries within two working days.</p>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div>
+        <p><strong>Pacific Heritage Tours</strong></p>
+        <p>Authentic cultural and nature experiences in the Pacific</p>
+      </div>
+      <div>
+        <p><a href="contact.html">Contact &amp; Booking</a></p>
+        <p><a href="about.html">About us</a></p>
+      </div>
+      <div>
+        <p>&copy; 2026 Pacific Heritage Tours</p>
+        <p>Student project – IS229 Web Design</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const form = document.getElementById('booking-form');
+    const status = document.getElementById('form-status');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      if (!form.checkValidity()) {
+        status.textContent = 'Please complete all required fields correctly before sending.';
+        status.className = 'status-message status-error';
+        return;
+      }
+
+      status.textContent = 'Thank you. Your enquiry has been recorded. We will reply within two working days.';
+      status.className = 'status-message status-success';
+      form.reset();
+
+      setTimeout(function () {
+        status.textContent = '';
+        status.className = 'status-message';
+      }, 8000);
+    });
+  </script>
+</body>
+</html>

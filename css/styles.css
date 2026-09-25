@@ -1,0 +1,680 @@
+/* ============================================================
+   Pacific Heritage Tours – IS229 Assessment 3
+   Professional responsive stylesheet
+   Pure CSS3 | Flexbox + CSS Grid | Mobile-first
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   1. CSS CUSTOM PROPERTIES (Design System)
+   ------------------------------------------------------------ */
+:root {
+  /* Colour system – refined Pacific palette */
+  --color-primary: #0c4a6e;
+  --color-primary-dark: #082f49;
+  --color-primary-light: #0369a1;
+  --color-accent: #f97316;
+  --color-accent-hover: #ea580c;
+  --color-bg: #f0f9ff;
+  --color-surface: #ffffff;
+  --color-text: #0f172a;
+  --color-text-muted: #475569;
+  --color-border: #e0f2fe;
+  --color-success: #059669;
+  --color-error: #dc2626;
+
+  /* Typography */
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --fs-xs: 0.8125rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1.0625rem;
+  --fs-lg: 1.1875rem;
+  --fs-xl: 1.3125rem;
+  --fs-2xl: 1.625rem;
+  --fs-3xl: 2rem;
+  --fs-4xl: 2.5rem;
+  --fs-5xl: 3rem;
+  --lh-tight: 1.2;
+  --lh: 1.65;
+  --lh-loose: 1.8;
+
+  /* Spacing scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-7: 1.75rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  /* Layout */
+  --container: 70rem;
+  --radius: 0.625rem;
+  --radius-lg: 1rem;
+  --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.06);
+  --shadow: 0 4px 12px -2px rgb(0 0 0 / 0.08), 0 2px 6px -2px rgb(0 0 0 / 0.04);
+  --shadow-lg: 0 12px 24px -4px rgb(0 0 0 / 0.1), 0 4px 10px -3px rgb(0 0 0 / 0.06);
+
+  /* Transitions */
+  --transition: 0.22s ease;
+}
+
+/* ------------------------------------------------------------
+   2. RESET & BASE
+   ------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans), sans-serif;  /* ← added fallback */
+  font-size: var(--fs-base);
+  line-height: var(--lh);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+a:hover {
+  color: var(--color-accent);
+}
+
+a:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ------------------------------------------------------------
+   3. TYPOGRAPHY
+   ------------------------------------------------------------ */
+h1, h2, h3, h4 {
+  line-height: var(--lh-tight);
+  margin-top: 0;
+  margin-bottom: var(--space-4);
+  color: var(--color-primary-dark);
+  font-weight: 700;
+}
+
+h1 {
+  font-size: clamp(1.75rem, 4vw, var(--fs-4xl));
+}
+
+h2 {
+  font-size: clamp(1.4rem, 3vw, var(--fs-3xl));
+}
+
+h3 {
+  font-size: var(--fs-xl);
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: var(--space-4);
+}
+
+ul, ol {
+  margin-top: 0;
+  margin-bottom: var(--space-4);
+  padding-left: var(--space-6);
+}
+
+li {
+  margin-bottom: var(--space-2);
+}
+
+strong {
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------------
+   4. LAYOUT UTILITIES
+   ------------------------------------------------------------ */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+}
+
+.section {
+  margin-bottom: var(--space-12);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ------------------------------------------------------------
+   5. SKIP LINK
+   ------------------------------------------------------------ */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: var(--space-4);
+  background: var(--color-primary);
+  color: white;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius);
+  z-index: 1000;
+  font-weight: 600;
+  transition: top var(--transition);
+}
+
+.skip-link:focus {
+  top: var(--space-4);
+  color: white;
+}
+
+/* ------------------------------------------------------------
+   6. HEADER & NAVIGATION (Flexbox)
+   ------------------------------------------------------------ */
+header {
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+header .container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-block: var(--space-4);
+}
+
+header h1,
+header .site-title {
+  margin: 0;
+  font-size: var(--fs-xl);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+header h1 a,
+header .site-title a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+header h1 a:hover,
+header .site-title a:hover {
+  color: var(--color-accent);
+}
+
+nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-2);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  display: block;
+  padding: var(--space-2) var(--space-4);
+  color: var(--color-text-muted);
+  font-weight: 500;
+  font-size: var(--fs-sm);
+  border-radius: var(--radius);
+  transition: background-color var(--transition), color var(--transition);
+}
+
+nav a:hover {
+  background-color: #e0f2fe;
+  color: var(--color-primary);
+}
+
+nav a[aria-current="page"] {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+nav a[aria-current="page"]:hover {
+  background-color: var(--color-primary-dark);
+  color: white;
+}
+
+/* ------------------------------------------------------------
+   7. MAIN CONTENT
+   ------------------------------------------------------------ */
+main {
+  flex: 1;
+  padding-block: var(--space-10) var(--space-20);
+}
+
+/* ------------------------------------------------------------
+   8. HERO SECTION (background image + blend)
+   ------------------------------------------------------------ */
+.hero {
+  display: grid;
+  gap: var(--space-6);
+  padding: var(--space-12) var(--space-8);
+  background-image:
+    linear-gradient(
+      145deg,
+      rgb(8 47 73 / 0.82) 0%,
+      rgb(12 74 110 / 0.75) 55%,
+      rgb(3 105 161 / 0.70) 100%
+    ),
+    url("../images/hero-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-blend-mode: overlay;
+  color: white;
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-16);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+  min-height: 22rem;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 80% 20%, rgb(255 255 255 / 0.1) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+.hero h1 {
+  color: white;
+  margin-bottom: var(--space-5);
+  letter-spacing: -0.02em;
+}
+
+.hero p {
+  font-size: var(--fs-lg);
+  max-width: 38rem;
+  opacity: 0.95;
+  line-height: var(--lh-loose);
+}
+
+.hero a {
+  color: #fef3c7;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.hero a:hover {
+  color: white;
+}
+
+/* ------------------------------------------------------------
+   9. CARD GRID (CSS Grid + auto-fit)
+   ------------------------------------------------------------ */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: var(--space-6);
+}
+
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6) var(--space-6) var(--space-7);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: #bae6fd;
+}
+
+.card h3 {
+  margin-bottom: var(--space-2);
+  color: var(--color-primary);
+  font-size: var(--fs-xl);
+}
+
+.card p,
+.card ul {
+  margin-bottom: 0;
+  color: var(--color-text-muted);
+  flex: 1;
+  font-size: var(--fs-sm);
+  line-height: var(--lh-loose);
+}
+
+/* ------------------------------------------------------------
+   10. GALLERY GRID
+   ------------------------------------------------------------ */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: var(--space-6);
+}
+
+.gallery-grid figure {
+  margin: 0;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.gallery-grid figure:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: #bae6fd;
+}
+
+.gallery-grid img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  background-color: #e0f2fe;
+}
+
+.gallery-grid figcaption {
+  padding: var(--space-4) var(--space-5);
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* ------------------------------------------------------------
+   11. FORMS
+   ------------------------------------------------------------ */
+form {
+  max-width: 40rem;
+  background: var(--color-surface);
+  padding: var(--space-8);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--color-border);
+}
+
+.form-group {
+  margin-bottom: var(--space-5);
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+  color: var(--color-text);
+}
+
+.required {
+  color: var(--color-error);
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  font: inherit;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-bg);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgb(12 74 110 / 0.2);
+}
+
+fieldset {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-5);
+  margin-bottom: var(--space-6);
+}
+
+legend {
+  font-weight: 700;
+  padding-inline: var(--space-2);
+  color: var(--color-primary);
+}
+
+button,
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-7);
+  font: inherit;
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  letter-spacing: 0.01em;
+  color: white;
+  background-color: var(--color-primary);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background-color var(--transition), transform var(--transition), box-shadow var(--transition);
+  box-shadow: 0 2px 4px rgb(12 74 110 / 0.25);
+}
+
+button:hover,
+.btn:hover {
+  background-color: var(--color-primary-dark);
+  box-shadow: 0 4px 10px rgb(12 74 110 / 0.3);
+}
+
+button:focus-visible,
+.btn:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+.status-message {
+  margin-bottom: var(--space-6);
+  padding: var(--space-4);
+  border-radius: var(--radius);
+  font-weight: 500;
+}
+
+.status-success {
+  background-color: #c6f6d5;
+  color: var(--color-success);
+  border: 1px solid #9ae6b4;
+}
+
+.status-error {
+  background-color: #fed7d7;
+  color: var(--color-error);
+  border: 1px solid #feb2b2;
+}
+
+/* ------------------------------------------------------------
+   12. TABLE
+   ------------------------------------------------------------ */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--space-6);
+}
+
+th, td {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+
+th {
+  background-color: var(--color-primary);
+  color: white;
+  font-weight: 600;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr:nth-child(even) {
+  background-color: var(--color-bg);
+}
+
+/* ------------------------------------------------------------
+   13. FOOTER
+   ------------------------------------------------------------ */
+footer {
+  background-color: var(--color-primary-dark);
+  color: #cbd5e1;
+  padding-block: var(--space-12);
+  margin-top: auto;
+}
+
+footer .container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+}
+
+footer a {
+  color: #7dd3fc;
+  font-weight: 500;
+}
+
+footer a:hover {
+  color: white;
+}
+
+footer p {
+  margin-bottom: var(--space-2);
+  font-size: var(--fs-sm);
+  line-height: var(--lh);
+}
+
+footer strong {
+  color: white;
+  font-size: var(--fs-base);
+  letter-spacing: -0.01em;
+}
+
+/* ------------------------------------------------------------
+   14. RESPONSIVE DESIGN
+   ------------------------------------------------------------ */
+@media (min-width: 48rem) {
+  header .container {
+    flex-wrap: nowrap;
+  }
+
+  nav ul {
+    gap: var(--space-2) var(--space-5);
+  }
+
+  .hero {
+    padding: var(--space-12) var(--space-10);
+  }
+
+  footer .container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+  }
+}
+
+@media (min-width: 64rem) {
+  .container {
+    padding-inline: var(--space-8);
+  }
+
+  .hero {
+    grid-template-columns: 1.4fr 1fr;
+    align-items: center;
+    padding: var(--space-16) var(--space-12);
+  }
+
+  nav a {
+    padding: var(--space-2) var(--space-4);
+  }
+}
+
+@media (min-width: 80rem) {
+  :root {
+    --fs-5xl: 3rem;
+  }
+}
+
+/* ------------------------------------------------------------
+   15. PRINT STYLES
+   ------------------------------------------------------------ */
+@media print {
+  header, footer, .skip-link {
+    display: none;
+  }
+
+  body {
+    background: white;
+    color: black;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+}
